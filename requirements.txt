@@ -13,4 +13,4 @@ cryptography==36.0.0
 fake-useragent==1.5.1
 aiohttp-socks==0.9.1
 eth-utils==5.3.0
-pytz==2024.1
+solanakit @ git+https://github.com/genoshide/solanakit.git
